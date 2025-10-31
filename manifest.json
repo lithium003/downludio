@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Downludio",
+  "version": "1.0",
+  "description": "Click to download the currently playing (or paused) audio from Udio.",
+  "permissions": ["scripting", "activeTab", "tabs"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Download Udio Audio"
+  }
+}
