@@ -1,4 +1,4 @@
-(() => {
+(async () => {
   function tryRegex(text) {
     // simple JSON-style capture
     let m = text.match(/"song_path"\s*:\s*"([^"]+)"/);
@@ -66,10 +66,25 @@
     location.href = url;
   }
 
-  // If we're not on an embed page, navigate to the embed page if possible.
+  // If we're not on an embed page, try to fetch the embed page and extract the song path
   if (!/\/embed\//i.test(location.pathname)) {
     const embedUrl = findEmbedUrlInDoc();
     if (embedUrl) {
+      // Try fetching the embed page and extracting song_path without navigating.
+      // If fetch/CORS fails or no path found, fall back to navigating to the embed page.
+      try {
+        const resp = await fetch(embedUrl, { credentials: 'include' });
+        if (resp && resp.ok) {
+          const html = await resp.text();
+          const direct = extractSongPathFromText(html);
+          if (direct) {
+            navigateTo(direct);
+            return;
+          }
+        }
+      } catch (e) {
+        // likely CORS or network error — fall back to navigation
+      }
       location.href = embedUrl;
       return;
     }
@@ -94,43 +109,4 @@
     return;
   }
 
-  // The below doesn't seem to be necessary, commenting out for now since I don't understand what it does anyway.
-
-  // If not found yet, observe mutations briefly (page uses NextJS dynamic script pushes)
-  // let observer;
-  // let timedOut = false;
-  // const timeout = setTimeout(() => {
-  //   timedOut = true;
-  //   if (observer) observer.disconnect();
-  //   // final fallback: try audio src but ignore blob:
-  //   const audioEl = document.querySelector('audio');
-  //   if (audioEl) {
-  //     let src = audioEl.src;
-  //     if (!src) {
-  //       const source = audioEl.querySelector('source');
-  //       if (source) src = source.src;
-  //     }
-  //     if (src && !src.startsWith('blob:')) {
-  //       navigateTo(src);
-  //       return;
-  //     }
-  //   }
-  //   alert('No "song_path" found. Run the extension on the embed page or try again after the page finishes loading.');
-  // }, 5000);
-
-  // observer = new MutationObserver((mutations) => {
-  //   if (timedOut) return;
-  //   const path = scanForSongPath();
-  //   if (path) {
-  //     clearTimeout(timeout);
-  //     observer.disconnect();
-  //     navigateTo(path);
-  //   }
-  // });
-
-  // observer.observe(document.documentElement || document.body, {
-  //   childList: true,
-  //   subtree: true,
-  //   characterData: true,
-  // });
 })();
