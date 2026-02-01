@@ -1,8 +1,8 @@
 # Downludio - Chrome Extension
 Downludio is an audio downloader for https://www.udio.com/.  
-Since Udio disabled downloads on 30/10/2025, there is no way to download your creations on the site itself. This Chrome extension allows you to do so.
-This extension should work in any Chromium browser (Google Chrome, Micrsoft Edge, Opera for example)
-*Disclaimer: This extension was heavily vibecoded.*
+Since Udio disabled downloads on 30/10/2025, there is no way to download your creations on the site itself. This Chrome extension allows you to do so.  
+This extension should work in any Chromium browser (Google Chrome, Micrsoft Edge, Opera for example)  
+*Disclaimer: This extension was heavily vibecoded.*  
 
 ## Steps to install
 1. Hit the big green `<> Code` button
