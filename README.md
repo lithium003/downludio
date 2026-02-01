@@ -2,6 +2,7 @@
 Downludio is an audio downloader for https://www.udio.com/.  
 Since Udio disabled downloads on 30/10/2025, there is no way to download your creations on the site itself. This Chrome extension allows you to do so.
 This extension should work in any Chromium browser (Google Chrome, Micrsoft Edge, Opera for example)
+*Disclaimer: This extension was heavily vibecoded.*
 
 ## Steps to install
 1. Hit the big green `<> Code` button
@@ -14,6 +15,6 @@ This extension should work in any Chromium browser (Google Chrome, Micrsoft Edge
 8. The extension should appear in your extension list. Keep developer mode on. You can turn it off whenever you want, but you will need to turn it back on if you want to use the extension again.
 
 ## Steps to use
-1. Click Play on one of your audio creations so that it starts playing at the bottom of the screen. You can pause it if you want.
+1. Click Play on one of your audio creations so that it starts playing at the bottom of the screen. You can pause it if you want. (Note: If you don't do this, the song at the top of your library will be the one downloaded by default.)
 2. Go to your extensions and click the Downludio icon.
 3. Your audio will begin to download. Note: the file will just be named `The%20Untitled.mp3`, it doesn't save the generation's name.
